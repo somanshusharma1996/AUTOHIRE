@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+    <title> Identity </title>
+    </head> 
+    <body>
+        {% load crispy_forms_tags %}
+
+        <div class="form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <fieldset class="form-group" style='width:600px'>
+                                <legend class="border-bottom mb-4">Add Qualification</legend>
+                                {{ form|crispy }}
+                            </fieldset>
+                            <div class="form-group">
+                                <button class="btn btn-outline-info" type="submit">Add</button>
+                            </div>
+                         </form>
+                    </div>
+                </div>
+         </div>
+        </div>
+    </body>
+</html>

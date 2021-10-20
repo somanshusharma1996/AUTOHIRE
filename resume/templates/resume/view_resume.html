@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!---Google-font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="C:\Users\Vinee\Desktop\Autohire\create_resume\static\style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+
+        <title>AUTOHIRE</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+  </head>
+  <body>
+
+    
+    <div class="container">
+      <div class="row">
+        <div class = "col-10">
+          <h2>{{user.first_name }}&nbsp;{{ user.last_name}}<a class="edit" href="{% url 'resume:view_info' user.id %}"><i class="fa fa-edit"></i></a></h2>
+          <p class="gmail">{{user.email}}</p>
+          <p class="number">{{user.email}}</p>
+          <p class="address">{{resume.address}}</p>
+        </div>
+        <div class = "col-2">
+          <a href="#"><i class="fa fa-download">Download</i></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class = "col-10">
+          <h5>Qualifications</h5>
+                {% for q in qualifications %}
+                    <p class="degree"><b> Name - </b> {{q.name}} &nbsp;<b>Location - </b>{{q.location}}</p>
+                    <p class="duration"><b> Degree - </b>{{q.degree}} &nbsp;<b> Branch - </b> {{q.branch}}</p>
+                    <p class="duration"><b> Duration - </b>{{q.duration}}</p>
+                {% endfor %}
+          <a class="Add button"href="{% url 'resume:view-qualification_form' %}"><spam> + </spam> Add education </a>
+        </div>
+        <div class = "col-2">
+          <a class="edit" href="#"><i class="fa fa-edit"></i></a>
+          <a class="delete" href="#"><i class="fa fa-trash"></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class = "col-10">
+          <h5>Experience</h5>
+                {% for e in experience %}
+                    <p><b>{{e.name}}</b></p>
+                    <p><b>{{e.position}}</b></p>
+                    <p>{{e.location}} &nbsp;  {{e.duration}}</p>
+                    <p>{{e.desc}}</p>
+                {% endfor %}
+          <a class="Add button"href="{% url 'resume:experience' %}"><spam> + </spam> Add job </a>
+        </div>
+        <div class = "col-2">
+          <a class="edit" href="#"><i class="fa fa-edit"></i></a>
+          <a class="delete" href="#"><i class="fa fa-trash"></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class = "col-10">
+          <h5>INTERNSHIPS</h5>
+          
+                    {% for i in internship %}
+                        <p>{{i.name}}</p>
+                        <p><b>{{i.position}}</b></p>
+                        <p>{{i.location}} &nbsp;  {{i.duration}}</p>
+                        <p></p>
+                        <p>{{i.desc}}</p>
+                    {% endfor %}
+         
+          <a class="Add button"href="{% url 'resume:internship' %}"><spam> + </spam> Add internship </a>
+        </div>
+        <div class = "col-2">
+          <a class="edit" href="#"><i class="fa fa-edit"></i></a>
+          <a class="delete" href="#"><i class="fa fa-trash"></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class = "col-10">
+          <h5>Certifications</h5>
+          
+                {% for c in certification %}
+                    <p>{{c.name}}</p>
+                    <p><b>{{c.company}}</b></p>
+                    <p>{{c.duration}}</p>
+                    <p></p>
+                    <p>{{c.desc}}</p>
+                {% endfor %}
+          
+          <a class="Add button"href="{% url 'resume:certification' %}"><spam> + </spam> Add certification </a>
+        </div>
+        <div class = "col-2">
+          <a class="edit" href="#"><i class="fa fa-edit"></i></a>
+          <a class="delete" href="#"><i class="fa fa-trash"></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class = "col-10">
+          <h5>PROJECTS</h5>
+          
+                {% for p in project %}
+                    <p>{{p.name}}</p>
+                    <p><b>{{p.duration}}</b></p>
+                    <p> {{p.desc}}</p>
+                    <p></p>
+                    <p>{{p.link}}</p>
+                {% endfor %}
+          
+          <a class="Add button"href="{% url 'resume:projects' %}"><spam> + </spam> Add Project </a>
+        </div>
+        <div class = "col-2">
+          <a class="edit" href="#"><i class="fa fa-edit"></i></a>
+          <a class="delete" href="#"><i class="fa fa-trash"></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class = "col-10">
+          <h5>SKILLS</h5>
+          
+                {% for t in technical_skill %}
+                    <p>{{t.skill}}</p>
+                    <p>{{t.expertise}}</p>
+                {% endfor %}
+          
+          <a class="Add button"href="{% url 'resume:skills' %}"><spam> + </spam> Add skills</a>
+        </div>
+        <div class = "col-2">
+          <a class="edit" href="#"><i class="fa fa-edit"></i></a>
+          <a class="delete" href="#"><i class="fa fa-trash"></i></a>
+        </div>
+      </div>
+      
+
+    </div>
+  </body>
+</html>
