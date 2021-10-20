@@ -1,10 +1,8 @@
-
-
-
+{% load has_group %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Autohire</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -19,9 +17,50 @@
     
     /* Add a gray background color and some padding to the footer */
     footer {
-      background-color: #f2f2f2;
+      background-color: #FF5733;
       padding: 25px;
     }
+    ul.nav.navbar-nav {
+      margin: 0 0 0 50px;
+}
+.top-heading{
+  margin-top:15px;
+  color:#fff;
+}
+.card-text {
+    width: 1200px;
+    margin: 40px auto;
+    background: #ececec;
+    border-radius: 30px;
+}
+.main-job-container {
+    display: flex;
+    justify-content: space-around;
+}
+.main-job-heading {
+    position: relative;
+    max-height: 200px;
+    height: auto;
+    width: auto;
+    top: 70px;
+    left: 60px;
+}
+.main-job-button{
+  position: relative;
+    max-height: 200px;
+    height: auto;
+    width: auto;
+    top: 140px;
+    left: 60px;
+}
+.center{
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+}
+
   </style>
 </head>
 <body>
@@ -34,33 +73,59 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">AutoHire</a>
+      <h4 class="top-heading">AutoHire</h4>
+      
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{% url 'accounts:login' %}">Home</a></li>
+        <li><a href="{% url 'home:index' %}">Home</a></li>
         </ul>
+
+      
+      
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{% url 'accounts:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      {% if user.is_authenticated %}
+        {% if request.user|has_group:"Employer" %} 
+          <li><a href="{% url 'home:recivejobapplications' %}" class="mr-2 text-light">Applicants</a></li>
+          <li><a href="{% url 'home:job' %}" class="mr-2 text-light">Post Job</a></li>
+        {% elif request.user|has_group:"Candidate" %} 
+          <li><a href="{% url 'home:job_create_list' %}" class="mr-2 text-light" >Jobs</a></li>
+          <li><a href="{% url 'resume:resume' %}" class="mr-2 text-light" >Resume</a></li>
+          <li><a href="{% url 'home:after_apply' %}" class="mr-2 text-light" >history</a></li>
+        {% endif %} 
+
+      
+        <li><a href="{% url 'accounts:logout' %}">{% csrf_token %}<span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul> 
+
+      {% else %}
+      <ul class="nav navbar-nav navbar-right">
+      <li><a href="{% url 'accounts:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
+       
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{% url 'accounts:candidate_signup' %}"><span class="glyphicon glyphicon-log-in"></span> candidate_signup</a></li>
         <li><a href="{% url 'accounts:employer_signup' %}"><span class="glyphicon glyphicon-log-in"></span> employer_signup</a></li>
       </ul>
+      {% endif %}
     </div>
   </div>
 </nav>
 
-<div class="jumbotron">
-  <div class="container text-center">
-    <h1>AutoHire</h1>      
-    <p>Find Best Jobs Here.</p>
+<div class="jumbotron" style="
+  font-family: Montserrat,sans-serif;
+  
+  background-image: linear-gradient(180deg, #9274b7, #3b4a8d);
+  " >
+  <div class="container text-center" style="color:white">
+    <p  ><h1>AutoHire</h1></p>
+    <p style="color:white;">Find Best Jobs Here.</p>
   </div>
 </div>
 
 
 {% load crispy_forms_tags %} 
-{% block content %}
+
 <div class="container">
     <h1>Login</h1>
     <div class="form-border">
@@ -78,4 +143,3 @@
     <p>Not got an account? <a href="{% url 'accounts:candidate_signup' %}"><u>Sign Up</u></a></p>
     <p>Not got an account? <a href="{% url 'accounts:employer_signup' %}"><u>Sign Up</u></a></p>
 </div>
-{% endblock %}
